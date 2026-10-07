@@ -5,18 +5,18 @@
     <link rel="stylesheet" crossorigin href="/tentone-website/assets/global-BDWfBrjV.css">
   </head>
 <body style="margin: 0; padding: 0;">
-    <div class="header-container">
-  <h1 class="page-title">Book an Event With Us</h1>
+<div class="header-container">
+  <h1 class="page-title">{{pageTitle}}</h1>
   <nav class="linkbar">
-    <a href="./index.html" class="{=$activeHome}">Home</a>
+    <a href="./index.html" class="{{activeHome}}">Home</a>
     <span class="nav-star">&starf;&starf;&starf;</span>
-    <a href="./shows.html" class="{=$activeShows}">Shows</a>
+    <a href="./shows.html" class="{{activeShows}}">Shows</a>
     <span class="nav-star">&starf;&starf;&starf;</span>
-    <a href="./booking.html" class="active">Booking</a>
+    <a href="./booking.html" class="{{activeBooking}}">Booking</a>
     <span class="nav-star">&starf;&starf;&starf;</span>
-    <a href="./tentone.html" class="{=$activeTentone}">Tentone</a>
+    <a href="./tentone.html" class="{{activeTentone}}">Tentone</a>
     <span class="nav-star">&starf;&starf;&starf;</span>
-    <a href="./links.html" class="{=$activeLinks}">Links</a>
+    <a href="./links.html" class="{{activeLinks}}">Links</a>
   </nav>
 </div>
 
@@ -41,11 +41,10 @@
     margin: 0 4px;
     vertical-align: middle;
 }
-</style>
-    <main style="padding: 20px;">
+</style>    <main style="padding: 20px;">
       <h1>Book an Event With Us</h1>
       <p>We would love to have you at one of our events! Please fill out the form below to book your spot.</p>
-      <form action="/submit-booking" method="POST">
+      <form action="./submit-booking" method="POST">
         <label for="name">Name:</label><br />
         <input type="text" id="name" name="name" required /><br /><br />
         
