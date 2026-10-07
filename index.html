@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tentone Records</title>
+  <link rel="stylesheet" crossorigin href="/assets/global-CpwRAVOB.css">
+</head>
+<body style="margin: 0; padding: 0;">
+
+    <!-- Inject shared linkbar component -->
+    <!-- components/linkbar.html -->
+<div style="background-color: #222; padding: 15px; font-family: sans-serif; color: white;">
+  <h1 style="margin: 0 0 15px 0; font-size: 1.8rem; color: #ffb703;">Home</h1>
+
+  <nav>
+    <a href="/index.html" class="active">Home</a> &starf;&starf;&starf;
+    <a href="/tentone.html" class="{=$activeAbout}">About Us</a> &starf;&starf;&starf; 
+    <a href="/shows.html" class="{=$activeShows}">Upcoming Shows</a> &starf;&starf;&starf; 
+    <a href="/booking.html" class="{=$activeBooking}">Book With Us</a> &starf;&starf;&starf; 
+    <a href="/links.html" class="{=$activeSocials}">Our Socials</a>
+  </nav>
+</div>
+
+<style>
+  nav a { 
+    color: #ccc; 
+    text-decoration: none; 
+    padding: 2px 6px;
+    transition: color 0.2s ease;
+  }
+  nav a:hover {
+    color: #fff;
+  }
+  nav a.active { 
+    color: #ffb703; 
+    font-weight: bold; 
+    border-bottom: 2px solid #ffb703;
+  }
+</style>
+
+    <main class="content-container" style="padding: 20px;">
+        <h1>Welcome to Tentone Records</h1>
+        <p>Independent music, live shows, and radio broadcasting.</p>
+    </main>
+
+</body>
+</html>
