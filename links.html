@@ -9,13 +9,17 @@
 <div style="background-color: #222; padding: 15px; font-family: sans-serif; color: white;">
   <h1 style="margin: 0 0 15px 0; font-size: 1.8rem; color: #ffb703;">Our Socials</h1>
 
-  <nav>
-    <a href="./index.html" class="{=$activeHome}">Home</a> &starf;&starf;&starf;
-    <a href="./tentone.html" class="{=$activeAbout}">About Us</a> &starf;&starf;&starf; 
-    <a href="./shows.html" class="{=$activeShows}">Upcoming Shows</a> &starf;&starf;&starf; 
-    <a href="./booking.html" class="{=$activeBooking}">Book With Us</a> &starf;&starf;&starf; 
-    <a href="./links.html" class="active">Our Socials</a>
-  </nav>
+<nav class="linkbar">
+  <a href="./index.html" class="{{activeHome}}">Home</a>
+  <span class="nav-star">&starf;&starf;&starf;</span>
+  <a href="./shows.html" class="{{activeShows}}">Shows</a>
+  <span class="nav-star">&starf;&starf;&starf;</span>
+  <a href="./booking.html" class="{{activeBooking}}">Booking</a>
+  <span class="nav-star">&starf;&starf;&starf;</span>
+  <a href="./tentone.html" class="{{activeTentone}}">Tentone</a>
+  <span class="nav-star">&starf;&starf;&starf;</span>
+  <a href="./links.html" class="{{activeLinks}}">Links</a>
+</nav>
 </div>
 
 <style>
@@ -33,6 +37,12 @@
     font-weight: bold; 
     border-bottom: 2px solid #ffb703;
   }
+  .nav-star {
+    color: #ffb703; /* Tentone gold */
+    font-size: 0.85rem;
+    margin: 0 4px;
+    vertical-align: middle;
+}
 </style>
     <main style="padding: 20px;">
       <h1>Connect with Our Socials</h1>
