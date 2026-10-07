@@ -1,0 +1,30 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tentone Records</title>
+    <link rel="stylesheet" href="/src/css/global.css">
+  </head>
+<body style="margin: 0; padding: 0;">
+    <load src="./components/linkbar.html" pageTitle="Book an Event With Us" activeBooking="active" />
+    <main style="padding: 20px;">
+      <h1>Book an Event With Us</h1>
+      <p>We would love to have you at one of our events! Please fill out the form below to book your spot.</p>
+      <form action="/submit-booking" method="POST">
+        <label for="name">Name:</label><br />
+        <input type="text" id="name" name="name" required /><br /><br />
+        
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required /><br /><br />
+        
+        <label for="event">Event Type:</label><br />
+        <select id="event" name="event">
+          <option value="concert">Concert</option>
+          <option value="private-party">Private Party</option>
+          <option value="corporate-event">Corporate Event</option>
+        </select><br /><br />
+        
+        <label for="date">Preferred Date:</label><br />
+        <input type="date" id="date" name="date" required /><br /><br />
+        
+        <input type="submit" value="Submit Booking Request" />
+      </form>

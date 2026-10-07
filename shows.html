@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentone - Upcoming Shows</title>
+    <link rel="stylesheet" href="/src/css/global.css">
+</head>
+<body style="margin: 0; padding: 0;">
+
+    <!-- Inject shared navigation linkbar -->
+    <load src="./components/linkbar.html" pageTitle="Upcoming Shows" activeShows="active" />
+
+    <!-- Page Content Container -->
+    <main class="content-container" style="padding: 20px;">
+        <h1>Upcoming Shows</h1>
+        
+        <div id="events-container">
+            <p class="loading">Loading schedule...</p>
+        </div>
+    </main>
+
+ <!-- Bundled local ES Module script -->
+    <script type="module">
+        import ICAL from 'ical.js';
+
+        async function loadTentoneShows() {
+            const container = document.getElementById('events-container');
+            
+            try {
+                const response = await fetch('/api/calendar');
+                if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                
+                const icsText = await response.text();
+
+                if (!icsText.includes('BEGIN:VCALENDAR')) {
+                    throw new Error('Received invalid calendar payload from server');
+                }
+
+                const jcalData = ICAL.parse(icsText);
+                const comp = new ICAL.Component(jcalData);
+                const events = comp.getAllSubcomponents('vevent');
+                
+                container.innerHTML = '';
+
+                if (!events || events.length === 0) {
+                    container.innerHTML = '<p>No upcoming shows scheduled right now. Check back soon!</p>';
+                    return;
+                }
+
+                const sortedEvents = events
+                    .map(e => new ICAL.Event(e))
+                    .sort((a, b) => a.startDate.toJSDate() - b.startDate.toJSDate());
+
+                const now = new Date();
+                now.setHours(0, 0, 0, 0);
+
+                let upcomingCount = 0;
+
+                sortedEvents.forEach(event => {
+                    const startDateObj = event.startDate.toJSDate();
+                    const endDateObj = event.endDate ? event.endDate.toJSDate() : startDateObj;
+                    
+                    if (endDateObj >= now) {
+                        upcomingCount++;
+                        
+                        const formattedDate = startDateObj.toLocaleDateString('en-US', {
+                            weekday: 'short',
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        });
+
+                        const formattedTime = startDateObj.toLocaleTimeString('en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+
+                        const eventDescription = event.description ? escapeHtml(event.description) : '';
+
+                        // Extract 'transp' (Free / Busy status)
+                        const rawTransp = event.component.getFirstPropertyValue('transp');
+                        const availability = rawTransp === 'TRANSPARENT' ? 'Free' : 'Busy';
+
+                        const card = document.createElement('div');
+                        card.className = 'event-card';
+                        
+                        card.innerHTML = `
+                            <div class="event-title">${escapeHtml(event.summary || 'Tentone Show')}</div>
+                            <div class="event-date">
+                                📅 ${formattedDate}<br>
+                                ⏰ ${formattedTime}
+                            </div>
+                            <div class="event-location">📍 ${escapeHtml(event.location || 'Location TBA')}</div>
+                            ${eventDescription ? `<br><div class="event-details" style="white-space: pre-line;">📝 Details:<br>${eventDescription}</div>` : ''}
+                            <br>
+<!--                            <div class="event-status">💼 Status: ${availability}</div> -->
+                        `;
+                        container.appendChild(card);
+                    }
+                });
+
+                if (upcomingCount === 0) {
+                    container.innerHTML = '<p>No upcoming shows scheduled right now. Check back soon!</p>';
+                }
+
+            } catch (error) {
+                console.error('Calendar Error:', error);
+                container.innerHTML = `<p>Could not load shows at this time. (${error.message})</p>`;
+            }
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        loadTentoneShows();
+    </script>
+</body>
+</html>

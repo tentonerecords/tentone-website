@@ -1,0 +1,45 @@
+:root {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --accent-color: #ff3366;
+    --text-main: #e0e0e0;
+    --text-muted: #aaaaaa;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #ffffff;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+}
+
+/* Event Card Styles */
+.event-card {
+    border: 2px solid #ffb703; /* Gold/yellow border matching your Tentone theme */
+    border-radius: 8px;        /* Smooth rounded corners */
+    background-color: #1a1a1a; /* Dark contrast background */
+    padding: 16px;             /* Space inside the card */
+    margin-bottom: 20px;       /* Spacing between multiple show cards */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle drop shadow */
+}
+
+/* Style the event title inside the card */
+.event-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Style details text container */
+.event-details {
+    color: #cccccc;
+    white-space: pre-line;
+}
